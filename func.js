@@ -92,80 +92,58 @@ function typeWriterHTML(html, element) {
     let i = 0;
     element.innerHTML = ""; 
     
-    // Hilangkan spasi berlebih di awal/akhir
+    // Bersihkan teks dari br atau baris baru
     let cleanText = html.replace(/&lt;br&gt;/g, "\n").replace(/<br>/g, "\n").trim();
 
     function typing() {
-    function typing() {
-    if (i < cleanText.length) {
-        let char = cleanText.charAt(i);
-        
-        if (char === "\n") {
-            element.innerHTML += "<br>";
-        } else {
-            element.innerHTML += char;
-        }
-
-        // Efek Bold otomatis jika ada tanda bintang (opsional)
-        let currentContent = element.innerHTML;
-        if (currentContent.includes("*")) {
-            element.innerHTML = currentContent.replace(/\*(.*?)\*/g, "<b>$1</b>");
-        }
-
-        i++;
-        const modalContent = element.parentElement;
-        modalContent.scrollTop = modalContent.scrollHeight;
-        
-        typingTimer = setTimeout(typing, 30); 
-
-    } else {
-        // --- INI PERINTAH UNTUK MUNCULIN TEKS DI BAWAHNYA ---
-        // Kita tambahkan sedikit jeda 500ms agar tidak terlalu kaget munculnya
-        setTimeout(() => {
-            const wrapper = document.getElementById("xmas-typewriter-wrapper");
+        if (i < cleanText.length) {
+            let char = cleanText.charAt(i);
             
-            // Membuat elemen paragraf baru untuk link galeri
-            const linkGaleri = document.createElement("p");
-            linkGaleri.style.textAlign = "center";
-            linkGaleri.style.marginTop = "20px";
-            linkGaleri.style.animation = "fadeIn 1s forwards"; // Pastikan ada animasi fadeIn di CSS
-            linkGaleri.innerHTML = `
-                <span onclick="openXmasGallery()" style="color: #ffb7ce; font-weight: bold; cursor: pointer; text-decoration: underline; font-size: 0.9rem;">
-                    let's see our Christmas photo here
-                </span>
+            if (char === "\n") {
+                element.innerHTML += "<br>";
+            } else {
+                element.innerHTML += char;
+            }
+
+            // Real-time Bold (*teks*)
+            let currentContent = element.innerHTML;
+            if (currentContent.includes("*")) {
+                element.innerHTML = currentContent.replace(/\*(.*?)\*/g, "<b>$1</b>");
+            }
+
+            i++;
+            
+            // Auto scroll ke bawah
+            const modalContent = element.parentElement;
+            modalContent.scrollTop = modalContent.scrollHeight;
+            
+            typingTimer = setTimeout(typing, 30); 
+        } else {
+            // --- INI BAGIAN YANG MEMUNCULKAN TEKS SETELAH SELESAI ---
+            // Membuat div baru agar tidak mengganggu teks typewriter
+            const triggerDiv = document.createElement("div");
+            triggerDiv.style.textAlign = "center";
+            triggerDiv.style.marginTop = "20px";
+            triggerDiv.style.opacity = "0";
+            triggerDiv.style.transition = "opacity 1s ease";
+            
+            triggerDiv.innerHTML = `
+                <p style="font-size: 0.85rem; color: #888;">
+                    <span onclick="openXmasGallery()" style="color: #ffb7ce; cursor: pointer; text-decoration: underline; font-weight: bold;">
+                        let's see our Christmas photo here
+                    </span>
+                </p>
             `;
             
-            wrapper.appendChild(linkGaleri);
-        }, 500);
+            element.appendChild(triggerDiv);
+            
+            // Munculkan dengan efek halus
+            setTimeout(() => {
+                triggerDiv.style.opacity = "1";
+            }, 100);
+        }
     }
-}
-
-// Tambahkan fungsi ini di paling bawah file func.js
-function openXmasGallery() {
-    document.getElementById("xmas-gallery-modal").classList.add("show-pop");
-}
-
-function closeXmasGallery(e) {
-    // Supaya kalau klik area hitam luar kotak, modalku tertutup
-    if (e.target.id === "xmas-gallery-modal") {
-        document.getElementById("xmas-gallery-modal").classList.remove("show-pop");
-    }
-}
-
-// EDIT fungsi typing kamu supaya muncul teks "let's see..."
-function typing() {
-    if (i < cleanText.length) {
-        // ... (kode ketik yang sudah ada) ...
-        i++;
-        typingTimer = setTimeout(typing, 30);
-    } else {
-        // KETIKA SELESAI KETIK, MUNCULKAN TEKS LINK
-        const wrapper = document.getElementById("xmas-typewriter-wrapper");
-        wrapper.innerHTML += `<br><br><p style="text-align:center; animation: fadeIn 1s;">
-            <span onclick="openXmasGallery()" style="color:#ffb7ce; font-weight:bold; cursor:pointer; text-decoration:underline;">
-                let's see our Christmas photo here
-            </span></p>`;
-    }
+    typing();
 }
 
 
@@ -331,5 +309,7 @@ function createSnow() {
 // Panggil fungsi saat web dibuka
 
 createSnow();
+
+
 
 
