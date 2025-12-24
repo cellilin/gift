@@ -96,38 +96,48 @@ function typeWriterHTML(html, element) {
     let cleanText = html.replace(/&lt;br&gt;/g, "\n").replace(/<br>/g, "\n").trim();
 
     function typing() {
-        if (i < cleanText.length) {
-            let char = cleanText.charAt(i);
-            
-            if (char === "\n") {
-                element.innerHTML += "<br>";
-            } else {
-                element.innerHTML += char;
-            }
-
-            // Trik Ajaib: Setiap kali ngetik, kita cek apakah ada teks di antara bintang *...*
-            // Jika ada, kita ubah jadi <b>...</b> secara real-time
-// --- Di dalam fungsi typeWriterHTML ---
-
-// Trik Ajaib yang diperbarui:
-// Di dalam function typeWriterHTML
-let currentContent = element.innerHTML;
-if (currentContent.includes("*")) {
-    // Ini mengubah *teks* menjadi <b>teks</b>
-    element.innerHTML = currentContent.replace(/\*(.*?)\*/g, "<b>$1</b>");
-}
-
-            i++;
-            
-            const modalContent = element.parentElement;
-            modalContent.scrollTop = modalContent.scrollHeight;
-            
-            typingTimer = setTimeout(typing, 30); 
-
-            
+    function typing() {
+    if (i < cleanText.length) {
+        let char = cleanText.charAt(i);
+        
+        if (char === "\n") {
+            element.innerHTML += "<br>";
+        } else {
+            element.innerHTML += char;
         }
+
+        // Efek Bold otomatis jika ada tanda bintang (opsional)
+        let currentContent = element.innerHTML;
+        if (currentContent.includes("*")) {
+            element.innerHTML = currentContent.replace(/\*(.*?)\*/g, "<b>$1</b>");
+        }
+
+        i++;
+        const modalContent = element.parentElement;
+        modalContent.scrollTop = modalContent.scrollHeight;
+        
+        typingTimer = setTimeout(typing, 30); 
+
+    } else {
+        // --- INI PERINTAH UNTUK MUNCULIN TEKS DI BAWAHNYA ---
+        // Kita tambahkan sedikit jeda 500ms agar tidak terlalu kaget munculnya
+        setTimeout(() => {
+            const wrapper = document.getElementById("xmas-typewriter-wrapper");
+            
+            // Membuat elemen paragraf baru untuk link galeri
+            const linkGaleri = document.createElement("p");
+            linkGaleri.style.textAlign = "center";
+            linkGaleri.style.marginTop = "20px";
+            linkGaleri.style.animation = "fadeIn 1s forwards"; // Pastikan ada animasi fadeIn di CSS
+            linkGaleri.innerHTML = `
+                <span onclick="openXmasGallery()" style="color: #ffb7ce; font-weight: bold; cursor: pointer; text-decoration: underline; font-size: 0.9rem;">
+                    let's see our Christmas photo here
+                </span>
+            `;
+            
+            wrapper.appendChild(linkGaleri);
+        }, 500);
     }
-    typing();
 }
 
 // Tambahkan fungsi ini di paling bawah file func.js
@@ -321,4 +331,5 @@ function createSnow() {
 // Panggil fungsi saat web dibuka
 
 createSnow();
+
 
