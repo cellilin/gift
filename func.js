@@ -130,6 +130,35 @@ if (currentContent.includes("*")) {
     typing();
 }
 
+// Tambahkan fungsi ini di paling bawah file func.js
+function openXmasGallery() {
+    document.getElementById("xmas-gallery-modal").classList.add("show-pop");
+}
+
+function closeXmasGallery(e) {
+    // Supaya kalau klik area hitam luar kotak, modalku tertutup
+    if (e.target.id === "xmas-gallery-modal") {
+        document.getElementById("xmas-gallery-modal").classList.remove("show-pop");
+    }
+}
+
+// EDIT fungsi typing kamu supaya muncul teks "let's see..."
+function typing() {
+    if (i < cleanText.length) {
+        // ... (kode ketik yang sudah ada) ...
+        i++;
+        typingTimer = setTimeout(typing, 30);
+    } else {
+        // KETIKA SELESAI KETIK, MUNCULKAN TEKS LINK
+        const wrapper = document.getElementById("xmas-typewriter-wrapper");
+        wrapper.innerHTML += `<br><br><p style="text-align:center; animation: fadeIn 1s;">
+            <span onclick="openXmasGallery()" style="color:#ffb7ce; font-weight:bold; cursor:pointer; text-decoration:underline;">
+                let's see our Christmas photo here
+            </span></p>`;
+    }
+}
+
+
 // Fungsi Back yang mereset segalanya
 function backToPasscode(currentMenuId) {
     clearTimeout(typingTimer); // Matikan animasi ngetik
@@ -292,3 +321,4 @@ function createSnow() {
 // Panggil fungsi saat web dibuka
 
 createSnow();
+
