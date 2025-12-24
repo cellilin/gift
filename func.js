@@ -142,7 +142,7 @@ function backToPasscode(currentMenuId) {
         ps.classList.remove("hidden");
         setTimeout(() => ps.style.opacity = "1", 50);
         input = ""; // Reset input passcode
-        document.getElementById("display-text").innerText = "****"; 
+        document.getElementById("display-text").innerText = "Enter Passcode"; 
     }, 500);
 }
 
@@ -290,4 +290,5 @@ function createSnow() {
 }
 
 // Panggil fungsi saat web dibuka
+
 createSnow();
