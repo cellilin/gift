@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From me to u</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <div id="snow-container"></div>
+</head>
+<body>
+
+    <audio id="mySong" loop>
+        <source src="It's_not_Living_1975.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="glass-card" id="passcode-screen">
+        <h3 id="display-text" style="text-align:center; color: #607d8b; letter-spacing: 4px;">Enter Passcode</h3>
+        <div class="content-wrapper">
+            <div class="player-box">
+                <div class="play-btn" id="playBtn" onclick="toggleMusic()">▶</div>
+                <strong style="color:#c3c2c2; font-size: 14px;">It's Not Living (If It's Not With You)</strong><br>
+                <small style="color:#888;">The 1975</small>
+            </div>
+            <div class="numpad">
+                <button onclick="pressKey('1')">1</button>
+                <button onclick="pressKey('2')">2</button>
+                <button onclick="pressKey('3')">3</button>
+                <button onclick="pressKey('4')">4</button>
+                <button onclick="pressKey('5')">5</button>
+                <button onclick="pressKey('6')">6</button>
+                <button onclick="pressKey('7')">7</button>
+                <button onclick="pressKey('8')">8</button>
+                <button onclick="pressKey('9')">9</button>
+                <button onclick="clearPass()">C</button>
+                <button onclick="pressKey('0')">0</button>
+                <button onclick="backspace()">←</button> </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-menu" class="modal-overlay hidden" style="opacity: 0;">
+        <div class="modal-content">
+            <h2 style="color: #444; letter-spacing: 2px;">2025 with u</h2>
+            <div class="menu-buttons">
+                <button class="btn-menu" onclick="showSection('main-menu', 'gallery-section')">GALLERY 📸</button>
+                <button class="btn-menu" onclick="showSection('main-menu', 'message-section')">MESSAGE 💌</button>
+                <button class="btn-menu btn-logout" onclick="logout()"> Back to Menu? </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="gallery-section" class="modal-overlay hidden" style="opacity: 0;">
+        <div class="modal-content">
+            <button class="back-link" onclick="showSection('gallery-section', 'main-menu')">← Back</button>
+            <h3 style="color: #444;">Memories</h3>
+            <div class="gallery-grid">
+                <img src="https://picsum.photos/400/500?random=10" onclick="viewImg(this.src)">
+                <img src="https://picsum.photos/400/500?random=11" onclick="viewImg(this.src)">
+                <img src="https://picsum.photos/400/500?random=12" onclick="viewImg(this.src)">
+                <img src="https://picsum.photos/400/500?random=13" onclick="viewImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div id="message-section" class="modal-overlay hidden" style="opacity: 0;">
+        <div class="modal-content">
+            <button class="back-link" onclick="showSection('message-section', 'main-menu')">← Back</button>
+            <div class="message-text">
+                "There was something about you that I can't quite remember...<br><br>
+                Happy Birthday! 🎂<br>Lagu The 1975 ini sengaja dipilih karena mengingatkanku padamu. Let's make 2025 ours. ❤️"
+            </div>
+        </div>
+    </div>
+
+ <div id="img-viewer" class="modal-overlay hidden">
+    <span class="close-viewer" onclick="closeImg()">×</span>
+    
+    <div class="viewer-container">
+        <button class="nav-btn prev-btn" onclick="changeImg(-1); event.stopPropagation()">&#10094;</button>
+        
+        <img id="full-img" src="">
+        
+        <button class="nav-btn next-btn" onclick="changeImg(1); event.stopPropagation()">&#10095;</button>
+    </div>
+</div>
+
+<div id="xmas-menu" class="modal-overlay hidden" style="opacity: 0;">
+    <div class="modal-content" style="position: relative; text-align: left; padding: 50px 25px 30px 25px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;">
+        
+        <button onclick="backToPasscode('xmas-menu')" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: #ff8fa3; font-weight: bold; cursor: pointer; z-index: 100;">
+            Back
+        </button>
+        
+        <div id="xmas-typewriter-wrapper" style="line-height: 1.8; font-size: 0.95rem; color: #444;"></div>
+
+<p id="xmas-text-source" style="display: none;">
+*Merry Christmas, my love.*
+
+On this special day, I just want to tell you how grateful I am to have you in my life. Christmas is about love, hope, and warmth, and somehow, you carry all of that in the way you stay, care, and choose me every day.
+
+Thank you for being patient with me, even when I’m not easy to understand. Thank you for loving me in your own quiet ways, for listening, and for trying, even when things aren’t perfect. Your presence alone brings me comfort, and that means more than I could ever explain.
+
+I pray this Christmas fills your heart with peace, strengthens you for everything you’re working toward, and reminds you that you are never alone. May God protect you, guide your steps, and surround you with love and goodness wherever you go.
+
+I hope we can keep growing together, learning from each other, and holding on, not only on beautiful days, but also on the ones that test us. Thank you for being you, and thank you for choosing me.
+
+*Merry Christmas, my love.*
+*You are one of the best gifts in my life 🤍* 
+
+(I would also want to say sorry karena tadi ga bales chat kamu, maaff sayangg aku beneran kelupaan 😢) </p>
+    <script src="func.js"></script>
+</body>
+</html>

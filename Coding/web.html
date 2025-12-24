@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 With U - Birthday Gift</title>
+    <style>
+        /* --- CSS DASAR & TEMA --- */
+        body {
+            background-color: #fce4ec;
+            font-family: 'Quicksand', 'Segoe UI', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hidden { display: none !important; }
+        
+        /* Transisi Opacity untuk semua overlay */
+        .modal-overlay, .glass-card {
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        /* --- KOTAK PASSCODE --- */
+ /* --- UPDATE CSS UNTUK KOTAK PUTIH --- */
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    transition: all 0.5s ease;
+    
+    /* PENGATURAN PC: Kotak menyesuaikan isi */
+    width: auto; 
+    display: inline-block; /* Agar kotak tidak melebar paksa ke samping di PC */
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: row; /* Tetap menyamping di PC */
+    gap: 60px; /* Jarak lebar antara musik dan numpad di PC */
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- LOGIKA KHUSUS HP --- */
+@media (max-width: 600px) {
+    body {
+        padding: 20px; /* Memberikan jarak dari pinggir layar HP */
+    }
+
+    .glass-card {
+        width: 100%; /* Kotak mengikuti lebar layar yang sudah diberi padding */
+        max-width: 360px; /* Membatasi agar kotak tidak terlalu raksasa di HP */
+        padding: 40px 20px; /* Padding atas-bawah lega, kiri-kanan pas */
+        display: block;
+    }
+
+    .content-wrapper {
+        flex-direction: column; /* Menumpuk di HP */
+        gap: 40px; /* Jarak antara musik dan numpad lebih lega di HP */
+    }
+
+    .numpad {
+        gap: 20px; /* Jarak antar tombol angka tidak rapat */
+    }
+}
+
+        .player-box {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            width: 180px;
+        }
+        
+        .play-btn {
+            background: #d32f2f;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 10px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .numpad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .numpad button {
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        
+        .numpad button:active { background: #ffc1e3; transform: scale(0.9); }
+
+        /* --- MODAL SYSTEM --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            width: 85%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* --- MENU UTAMA --- */
+        .menu-buttons { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+        
+        .btn-menu {
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: #ff8fa3;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .btn-menu:hover { background: #ff4d6d; transform: translateY(-3px); }
+        
+        .btn-logout {
+            background: #b0bec5; /* Warna abu-abu untuk tombol kembali ke password */
+            margin-top: 10px;
+        }
+
+        /* --- GALLERY --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .gallery-grid img {
+            width: 100%; height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            .content-wrapper { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="mySong" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="glass-card" id="passcode-screen">
+        <h3 id="display-text" style="text-align:center;">🔒 Enter Passcode</h3>
+        <div class="content-wrapper">
+            <div class="player-box">
+                <div class="play-btn" id="playBtn" onclick="toggleMusic()">▶</div>
+                <strong>Nsolo</strong><br><small>Music won't stop</small>
+            </div>
+            <div class="numpad">
+                <button onclick="pressKey('1')">1</button>
+                <button onclick="pressKey('2')">2</button>
+                <button onclick="pressKey('3')">3</button>
+                <button onclick="pressKey('4')">4</button>
+                <button onclick="pressKey('5')">5</button>
+                <button onclick="pressKey('6')">6</button>
+                <button onclick="pressKey('7')">7</button>
+                <button onclick="pressKey('8')">8</button>
+                <button onclick="pressKey('9')">9</button>
+                <button onclick="clearPass()">#</button>
+                <button onclick="pressKey('0')">0</button>
+                <button onclick="clearPass()">CLR</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-menu" class="modal-overlay hidden" style="opacity: 0;">
+        <div class="modal-content">
+            <h2>✨ 2025 With U ✨</h2>
+            <div class="menu-buttons">
+                <button class="btn-menu" onclick="showSection('main-menu', 'gallery-section')">Gallery! 📸</button>
+                <button class="btn-menu" onclick="showSection('main-menu', 'message-section')">Message! 💌</button>
+                <button class="btn-menu btn-logout" onclick="logout()">Lock Screen 🔒</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="gallery-section" class="modal-overlay hidden" style="opacity: 0;">
+        <div class="modal-content">
+            <button style="float:left; border:none; background:none; cursor:pointer;" onclick="showSection('gallery-section', 'main-menu')">← Back</button>
+            <h3>Our Memories</h3>
+            <div class="gallery-grid">
+                <img src="https://picsum.photos/200/300?random=1" onclick="viewImg(this.src)">
+                <img src="https://picsum.photos/200/300?random=2" onclick="viewImg(this.src)">
+                <img src="https://picsum.photos/200/300?random=3" onclick="viewImg(this.src)">
+                <img src="https://picsum.photos/200/300?random=4" onclick="viewImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div id="message-section" class="modal-overlay hidden" style="opacity: 0;">
+        <div class="modal-content">
+            <button style="float:left; border:none; background:none; cursor:pointer;" onclick="showSection('message-section', 'main-menu')">← Back</button>
+            <div style="margin-top:40px; font-style: italic; line-height: 1.6;">
+                "Happy birthday! Lagu ini akan terus berputar menemanimu membaca ini... ❤️"
+            </div>
+        </div>
+    </div>
+
+    <div id="img-viewer" class="modal-overlay hidden" onclick="this.classList.add('hidden')" style="background:rgba(0,0,0,0.9); opacity: 0;">
+        <img id="full-img" src="" style="max-width:90%; border-radius:10px;">
+    </div>
+
+    <script>
+        let input = "";
+        const correctCode = "1234"; 
+        const song = document.getElementById("mySong");
+
+        function toggleMusic() {
+            const btn = document.getElementById("playBtn");
+            if (song.paused) {
+                song.play();
+                btn.innerText = "II";
+            } else {
+                song.pause();
+                btn.innerText = "▶";
+            }
+        }
+
+        function pressKey(num) {
+            if (input.length < 4) {
+                input += num;
+                document.getElementById("display-text").innerText = "• ".repeat(input.length);
+            }
+            if (input.length === 4) {
+                if (input === correctCode) {
+                    // Animasi keluar screen password
+                    const ps = document.getElementById("passcode-screen");
+                    ps.style.opacity = "0";
+                    ps.style.transform = "scale(0.9)";
+                    
+                    setTimeout(() => {
+                        ps.classList.add("hidden");
+                        // Munculkan menu utama
+                        const mm = document.getElementById("main-menu");
+                        mm.classList.remove("hidden");
+                        setTimeout(() => mm.style.opacity = "1", 50);
+                    }, 400);
+                } else {
+                    document.getElementById("display-text").innerText = "❌ Salah!";
+                    setTimeout(clearPass, 1000);
+                }
+            }
+        }
+
+        function clearPass() {
+            input = "";
+            document.getElementById("display-text").innerText = "🔒 Enter Passcode";
+        }
+
+        // Fungsi Navigasi Antar Section (Lagu TIDAK disentuh di sini)
+        function showSection(hideId, showId) {
+            const hideEl = document.getElementById(hideId);
+            const showEl = document.getElementById(showId);
+
+            hideEl.style.opacity = "0";
+            setTimeout(() => {
+                hideEl.classList.add("hidden");
+                showEl.classList.remove("hidden");
+                setTimeout(() => showEl.style.opacity = "1", 50);
+            }, 400);
+        }
+
+        // Fungsi Logout (Kembali ke Password)
+        function logout() {
+            const mm = document.getElementById("main-menu");
+            mm.style.opacity = "0";
+            
+            setTimeout(() => {
+                mm.classList.add("hidden");
+                clearPass(); // Reset titik-titik password
+                
+                const ps = document.getElementById("passcode-screen");
+                ps.classList.remove("hidden");
+                ps.style.transform = "scale(1)";
+                setTimeout(() => ps.style.opacity = "1", 50);
+            }, 400);
+        }
+
+        function viewImg(src) {
+            const viewer = document.getElementById("img-viewer");
+            document.getElementById("full-img").src = src;
+            viewer.classList.remove("hidden");
+            setTimeout(() => viewer.style.opacity = "1", 50);
+        }
+    </script>
+</body>
+</html>
