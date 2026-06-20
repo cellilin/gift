@@ -1,7 +1,7 @@
 // --- KONFIGURASI ---
 let input = "";
-const correctCode = "2025"; 
 const correctCode2 = "2512";
+const specialCode = "3006";
 const song = document.getElementById("mySong");
 const display = document.getElementById("display-text");
 
@@ -11,7 +11,6 @@ function pressKey(num) {
 
     if (input.length < 4) {
         input += num;
-        let display = document.getElementById("display-text");
         
         // Efek angka muncul sebentar lalu jadi titik
         let dots = "• ".repeat(input.length - 1);
@@ -24,11 +23,15 @@ function pressKey(num) {
 
     if (input.length === 4) {
         setTimeout(() => {
-            if (input === correctCode) {
-                loginSuccess(); // Untuk "2025 with u"
-            } else if (input === "2512") { // Ganti manual atau pakai variabel correctCode2
-                loginSuccessXmas(); 
-            } else {
+            // 2512 tetap alur christmas
+             if (input === correctCode2) {
+                loginSuccessXmas();
+            }
+            // 3006 tetap alur sendiri, tidak ikut 2025
+            else if (input === specialCode) {
+                loginSuccessSakura();
+            }
+            else {
                 loginError();
             }
         }, 600);
@@ -57,15 +60,62 @@ function loginSuccess() {
     const ps = document.getElementById("passcode-screen");
     const mm = document.getElementById("main-menu");
 
-    // Efek transisi keluar (Fade Out)
+    modalStack = ["main-menu"];
     ps.style.opacity = "0";
     
     setTimeout(() => {
         ps.classList.add("hidden");
         mm.classList.remove("hidden");
-        // Efek transisi masuk (Fade In)
         setTimeout(() => mm.style.opacity = "1", 50);
     }, 400);
+}
+
+let modalStack = [];
+
+function pushModal(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    modalStack.push(id);
+    el.classList.remove("hidden");
+    requestAnimationFrame(() => {
+        el.style.opacity = "1";
+    });
+}
+
+function openModal(id) {
+    const current = document.getElementById(id);
+    if (!current) return;
+
+    if (modalStack[modalStack.length - 1] !== id) {
+        modalStack.push(id);
+    }
+
+    current.classList.remove("hidden");
+    requestAnimationFrame(() => {
+        current.style.opacity = "1";
+    });
+}
+
+function closeTopModal() {
+    const id = modalStack.pop();
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.opacity = "0";
+    setTimeout(() => {
+        el.classList.add("hidden");
+    }, 300);
+}
+
+function closeAllModals() {
+    while (modalStack.length) {
+        const id = modalStack.pop();
+        const el = document.getElementById(id);
+        if (el) {
+            el.style.opacity = "0";
+            el.classList.add("hidden");
+        }
+    }
 }
 
 let typingTimer; // Variabel untuk mengontrol timer
@@ -75,10 +125,10 @@ function loginSuccessXmas() {
     const xm = document.getElementById("xmas-menu");
     const wrapper = document.getElementById("xmas-typewriter-wrapper");
     
-    // Gunakan .innerHTML tanpa .trim() terlebih dahulu untuk tes
     const sourceElement = document.getElementById("xmas-text-source");
     const sourceHTML = sourceElement.innerHTML; 
 
+    modalStack = ["xmas-menu"];
     clearTimeout(typingTimer);
     wrapper.innerHTML = ""; 
 
@@ -91,6 +141,134 @@ function loginSuccessXmas() {
             typeWriterHTML(sourceHTML, wrapper);
         }, 50);
     }, 500);
+}
+
+function loginSuccessSakura() {
+    const ps = document.getElementById("passcode-screen");
+    const sakura = document.getElementById("sakura-menu");
+
+    modalStack = ["sakura-menu"];
+    ps.style.opacity = "0";
+    setTimeout(() => {
+        ps.classList.add("hidden");
+        sakura.classList.remove("hidden");
+        setTimeout(() => {
+            sakura.style.opacity = "1";
+        }, 50);
+    }, 400);
+}
+
+function showSakuraPanel(panel) {
+    const menu = document.getElementById("sakura-menu-panel");
+    const things = document.getElementById("sakura-things-panel");
+    const letter = document.getElementById("sakura-letter-panel");
+    const gallery = document.getElementById("sakura-gallery-panel");
+    const backBtn = document.getElementById("sakura-back-btn");
+
+    [menu, things, letter, gallery].forEach(el => el.classList.add("hidden"));
+
+    if (panel === "menu") {
+        menu.classList.remove("hidden");
+        if (backBtn) backBtn.textContent = "Back";
+    } else if (panel === "things") {
+        things.classList.remove("hidden");
+        if (backBtn) backBtn.textContent = "Back";
+    } else if (panel === "letter") {
+        letter.classList.remove("hidden");
+        if (backBtn) backBtn.textContent = "Back";
+    } else if (panel === "gallery") {
+        gallery.classList.remove("hidden");
+        if (backBtn) backBtn.textContent = "Back";
+    }
+}
+
+function toggleSakuraBack() {
+    const sakura = document.getElementById("sakura-menu");
+    if (!sakura) return;
+    backToPasscode('sakura-menu');
+}
+
+function openThingsModal() {
+    const modal = document.getElementById("things-modal");
+    if (!modal) return;
+    openModal("things-modal");
+}
+
+function closeThingsModal() {
+    const modal = document.getElementById("things-modal");
+    if (!modal) return;
+    if (modalStack[modalStack.length - 1] === "things-modal") {
+        modalStack.pop();
+    }
+    modal.style.opacity = "0";
+    setTimeout(() => modal.classList.add("hidden"), 300);
+}
+
+function closeMessageSection() {
+    const modal = document.getElementById("message-section");
+    if (!modal) return;
+    if (modalStack[modalStack.length - 1] === "message-section") {
+        modalStack.pop();
+    }
+    modal.style.opacity = "0";
+    setTimeout(() => modal.classList.add("hidden"), 300);
+}
+
+function closeGallerySection() {
+    const modal = document.getElementById("gallery-section");
+    if (!modal) return;
+    if (modalStack[modalStack.length - 1] === "gallery-section") {
+        modalStack.pop();
+    }
+    modal.style.opacity = "0";
+    setTimeout(() => modal.classList.add("hidden"), 300);
+}
+
+function openSecretMessage() {
+    const modal = document.getElementById("secret-message-modal");
+    if (!modal) return;
+    const envelope = document.querySelector("#secret-message-modal .secret-envelope");
+    if (envelope) {
+        envelope.classList.remove("open");
+        envelope.classList.remove("letter-out");
+    }
+    openModal("secret-message-modal");
+}
+
+function closeSecretMessage() {
+    const modal = document.getElementById("secret-message-modal");
+    if (!modal) return;
+    const envelope = document.querySelector("#secret-message-modal .secret-envelope");
+    if (envelope) {
+        envelope.classList.remove("open");
+        envelope.classList.remove("letter-out");
+    }
+    if (modalStack[modalStack.length - 1] === "secret-message-modal") {
+        modalStack.pop();
+    }
+    modal.style.opacity = "0";
+    setTimeout(() => modal.classList.add("hidden"), 300);
+}
+
+function toggleSecretEnvelope(event) {
+    if (event) event.stopPropagation();
+    const envelope = document.querySelector("#secret-message-modal .secret-envelope");
+    if (!envelope) return;
+
+    if (envelope.classList.contains("open")) {
+        envelope.classList.remove("open");
+        envelope.classList.remove("letter-out");
+    } else {
+        envelope.classList.add("open");
+        envelope.classList.remove("letter-out");
+    }
+}
+
+function toggleLetterReveal(event) {
+    if (event) event.stopPropagation();
+    const envelope = document.querySelector("#secret-message-modal .secret-envelope");
+    if (!envelope || !envelope.classList.contains("open")) return;
+    envelope.classList.toggle("letter-out");
 }
 
 function typeWriterHTML(html, element) {
@@ -274,6 +452,7 @@ function logout() {
     const mm = document.getElementById("main-menu");
     const ps = document.getElementById("passcode-screen");
 
+    closeAllModals();
     mm.style.opacity = "0";
     setTimeout(() => {
         mm.classList.add("hidden");
@@ -290,7 +469,9 @@ function toggleMusic() {
     if (!song || !btn) return;
 
     if (song.paused) {
-        song.play();
+        song.play().catch(() => {
+            btn.innerText = "▶";
+        });
         btn.innerText = "II";
     } else {
         song.pause();
@@ -355,7 +536,7 @@ document.getElementById("img-viewer").addEventListener("click", function(e) {
     }
 });
 
-function createFireworks() {
+function createSakuraEffect() {
     const canvas = document.getElementById('fireworks-canvas');
     if (!canvas || !canvas.getContext) return;
 
@@ -363,65 +544,72 @@ function createFireworks() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    let particles = [];
+    const petals = [];
 
-    class Particle {
-        constructor(x, y, color) {
-            this.x = x;
-            this.y = y;
-            this.color = color;
-            this.velocity = {
-                x: (Math.random() - 0.5) * 8,
-                y: (Math.random() - 0.5) * 8
-            };
-            this.alpha = 1;
-            this.friction = 0.95;
+    class Petal {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * -canvas.height;
+            this.size = Math.random() * 10 + 6;
+            this.speedX = Math.random() * 0.5 - 0.25;
+            this.speedY = Math.random() * 1.5 + 0.8;
+            this.rotation = Math.random() * Math.PI;
+            this.rotationSpeed = Math.random() * 0.03 - 0.015;
+            this.opacity = Math.random() * 0.6 + 0.4;
+            this.color = Math.random() > 0.5
+                ? 'rgba(255, 192, 203, ' + this.opacity + ')'
+                : 'rgba(255, 230, 240, ' + this.opacity + ')';
         }
 
         draw() {
-            ctx.globalAlpha = this.alpha;
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.rotation);
             ctx.beginPath();
-            ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+            ctx.ellipse(0, 0, this.size * 0.6, this.size * 0.45, 0, 0, Math.PI * 2);
             ctx.fillStyle = this.color;
             ctx.fill();
+            ctx.restore();
         }
 
         update() {
-            this.velocity.x *= this.friction;
-            this.velocity.y *= this.friction;
-            this.x += this.velocity.x;
-            this.y += this.velocity.y;
-            this.alpha -= 0.01;
+            this.x += this.speedX;
+            this.y += this.speedY;
+            this.rotation += this.rotationSpeed;
+
+            if (this.y > canvas.height + this.size) {
+                this.y = -this.size;
+                this.x = Math.random() * canvas.width;
+            }
+
+            if (this.x < -this.size * 3) this.x = canvas.width + this.size * 3;
+            if (this.x > canvas.width + this.size * 3) this.x = -this.size * 3;
         }
     }
 
-    function spawnFirework() {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * (canvas.height / 2);
-        const color = `hsl(${Math.random() * 360}, 50%, 50%)`;
-        for (let i = 0; i < 30; i++) {
-            particles.push(new Particle(x, y, color));
+    function spawnPetals() {
+        const count = Math.floor(window.innerWidth / 18);
+        for (let i = 0; i < count; i++) {
+            petals.push(new Petal());
         }
     }
 
     function animate() {
-        requestAnimationFrame(animate);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'; // Efek trail transparan
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        particles.forEach((particle, index) => {
-            if (particle.alpha > 0) {
-                particle.update();
-                particle.draw();
-            } else {
-                particles.splice(index, 1);
-            }
+        petals.forEach(petal => {
+            petal.update();
+            petal.draw();
         });
+        requestAnimationFrame(animate);
     }
 
-    setInterval(spawnFirework, 200); // Muncul tiap 0.8 detik
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+
+    spawnPetals();
     animate();
 }
 
-// Panggil fungsinya
-createFireworks();
+createSakuraEffect();
