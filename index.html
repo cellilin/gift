@@ -41,19 +41,21 @@
 
     <div id="main-menu" class="modal-overlay hidden" style="opacity: 0;">
         <div class="modal-content">
-            <h2 style="color: #444; letter-spacing: 2px;">2025 with u</h2>
+            <h2 style="color: #444; letter-spacing: 2px;">Seventeen Things About You</h2>
+            <p style="color: #777; font-size: 0.9rem; margin: 10px 0 18px;">A little space for the things I love about you.</p>
             <div class="menu-buttons">
-                <button class="btn-menu" onclick="showSection('main-menu', 'gallery-section')">GALLERY 📸</button>
-                <button class="btn-menu" onclick="showSection('main-menu', 'message-section')">MESSAGE 💌</button>
-                <button class="btn-menu btn-logout" onclick="logout()"> Back to Menu? </button>
+                <button class="btn-menu" onclick="openModal('things-modal')">17 Things</button>
+                <button class="btn-menu" onclick="openModal('message-section')">Love Letter</button>
+                <button class="btn-menu" onclick="openModal('gallery-section')">Memories</button>
+                <button class="btn-menu btn-logout" onclick="logout()">Back to Passcode</button>
             </div>
         </div>
     </div>
 
-<div id="gallery-section" class="modal-overlay hidden" style="opacity: 0;">
-    <div class="modal-content">
-        <button class="back-link" onclick="showSection('gallery-section', 'main-menu')">← Back</button>
-        <h3 style="color: #444;">Our Memories</h3>
+<div id="gallery-section" class="modal-overlay hidden" style="opacity: 0;" onclick="if(event.target===this) closeGallerySection()">
+    <div class="modal-content gallery-modal-card">
+        <button class="back-link" onclick="closeGallerySection()">← Back</button>
+        <h3 style="color: #444;">Memories</h3>
         
         <div class="video-container" style="margin-top: 20px;">
             <video width="100%" controls style="border-radius: 15px; border: 2px solid #ddd; aspect-ratio: 9/16; object-fit: cover;">
@@ -64,26 +66,141 @@
     </div>
 </div>
 
-<div id="message-section" class="modal-overlay hidden" style="opacity: 0;">
+<div id="message-section" class="modal-overlay hidden" style="opacity: 0;" onclick="if(event.target===this) closeMessageSection()">
     <div class="message-card-white">
-        <button class="back-link-top" onclick="showSection('message-section', 'main-menu')">Back</button>
+        <button class="back-link-top" onclick="closeMessageSection()">Back</button>
         
         <div class="message-text-wrapper">
-            <h2 class="message-title"> Happy New Year, my favorite human! </h2>
+            <h2 class="message-title">Love Letter</h2>
             <div class="message-body">
-                I was just sitting here for a moment, looking back at everything that’s happened lately, and honestly, the best part of it all was simply having you by my side. I’m just so grateful for every laugh we shared, the conversations we had, and even those tiny, quiet moments where we spent hours just doing absolutely nothing together. You’ve truly become my safe place and my best friend all in one.
+                To My Dearest Love, on Your 17th Birthday ♡
                 <br><br>
-                Thank you for being the person I can always run to without hesitation. I know I’m not always the easiest person to deal with, and I have my moments where I can be a lot to handle, but the way you love me through it all makes me want to be a better version of myself every single day. Thank you for listening to my endless stories and for making even the most boring, ordinary days feel like something special just because you were there.
+                Happy 17th Birthday, my love.
                 <br><br>
-                I have so many hopes and dreams for us in this coming year. I’m so excited for what's next because I know that as long as I have you, I can handle whatever comes our way. I can’t wait to see you crush all your goals—I’ll be right there in the front row cheering the loudest for you, just like I always do. Thank you for choosing me every single day, even when things weren't perfect.
+                I've been staring at this blank page for far longer than I want to admit because every time I try to write about you, I find myself struggling to put into words what my heart seems to understand so easily. How do you explain what someone means to you when they've become such a natural part of your life? How do you describe the person who quietly became your favorite thought, your safest place, and the best part of so many ordinary days?
                 <br><br>
-                I know it’s just a turn of the calendar, but it feels like a beautiful fresh start for us to build even more memories. Let’s make this one our best chapter yet and the time we look back on as the start of something truly amazing. 
+                Seventeen years ago, the world welcomed you into it. It was just another day to everyone else, but now I can't help thinking about how lucky the world was that day. Because somewhere, a boy was born who would grow into someone capable of making people feel loved simply by being himself. And somehow, years later, I got lucky enough to know that person.
                 <br><br>
-                <b> Happy New Year, baby boy! I love you more than words can ever say. </b>
+                I don't tell you this enough, but sometimes I stop and think about how much you've changed my life. Not in some dramatic, movie-like way. You changed it quietly. Gently. The way sunlight slowly fills a room without anyone noticing. Before you, I never realized how guarded I was. I never realized how much of myself I kept hidden from the world. Then you came along, and somehow being myself felt easy. Being vulnerable felt less frightening. You made me softer without even trying, and I don't think I ever want to be the person I was before I met you.
+                <br><br>
+                What I love most about you isn't just the way you make me happy. It's the way you exist in my life without even trying and somehow make everything feel lighter. You're in the songs I listen to, in the random moments that make me smile, in every exciting thing that happens that makes me immediately think, "I can't wait to tell him." You've become part of the little things, and I think that's how you know someone truly matters. Not when they're only present in your biggest moments, but when they quietly live in all the small ones too.
+                <br><br>
+                Sometimes it's honestly a little scary to admit how much you mean to me. Not because I regret it, but because caring this deeply about someone makes your heart feel exposed. There are moments when I look at you and feel overwhelmed by how important you've become to me. You are no longer just someone I love. You've become someone whose happiness matters to me, whose dreams I find myself rooting for, whose sadness I wish I could take away, and whose smile feels like one of my favorite things in the world.
+                <br><br>
+                As you turn seventeen today, I hope you know how loved you are. I hope you know that the people around you are better because you're here. I hope you never lose the kindness in your heart, the dreams you carry, or the things that make you uniquely you. And if there ever comes a day when you doubt yourself, I hope you remember that there is someone who sees so much beauty in you, even in the parts you struggle to love yourself.
+                <br><br>
+                Thank you for every conversation, every laugh, every memory, and every moment you've shared with me. Thank you for becoming such an important part of my life. Meeting you wasn't just one of the happiest things that happened to me. It changed me. It taught me that love can feel safe, gentle, and real all at once.
+                <br><br>
+                I don't know what the future holds for us. Nobody does. But what I do know is that if I could go back and live this life all over again, I would still want every road to lead me to you. I would still choose every conversation, every memory, every moment that brought me closer to the person writing themselves into my heart without even realizing it.
+                <br><br>
+                Happy Birthday, my love.
+                <br><br>
+                If loving you is the one thing I get right in this life, then I think that's more than enough for me. No matter how many birthdays come and go, no matter how much time passes, I will always be grateful that seventeen years ago, the world gave me the chance to one day know you.
+                <br><br>
+                Forever cheering for you.
+                <br>
+                Forever grateful for you.
+                <br>
+                Forever loving you. ♡
+                <br><br>
+                <span class="secret-link" onclick="openSecretMessage()" style="color:#ff8fa3; font-weight:bold; cursor:pointer; text-decoration: underline;">Secret Message</span>
             </div>
         </div>
     </div>
 </div>
+
+<div id="sakura-menu" class="modal-overlay hidden" style="opacity: 0;">
+    <div class="sakura-card">
+        <button class="back-link-top" id="sakura-back-btn" onclick="toggleSakuraBack()">Back</button>
+        <div class="sakura-badge">3006</div>
+        <h2 class="sakura-title">for you</h2>
+        <p class="sakura-text">For the quiet moments, the soft smiles, and the little things that matter most.</p>
+
+        <div id="sakura-menu-panel" class="sakura-panel active">
+            <div class="sakura-actions">
+                <button class="sakura-option-btn" onclick="showSakuraPanel('things')">17 Things</button>
+                <button class="sakura-option-btn" onclick="showSakuraPanel('letter')">Love Letter</button>
+                <button class="sakura-option-btn" onclick="showSakuraPanel('gallery')">Memories</button>
+            </div>
+        </div>
+
+        <div id="sakura-things-panel" class="sakura-panel hidden">
+            <button class="sakura-panel-close" onclick="showSakuraPanel('menu')">← Back</button>
+            <div class="things-title">17 things I like about you</div>
+            <div class="things-grid">
+                <div class="thing-card" onclick="this.classList.toggle('flipped')"><div class="thing-inner"><div class="thing-front">1</div><div class="thing-back">Your smile makes everything brighter.</div></div></div>
+                <div class="thing-card" onclick="this.classList.toggle('flipped')"><div class="thing-inner"><div class="thing-front">2</div><div class="thing-back">Your laugh is one of my favorite sounds.</div></div></div>
+                <div class="thing-card" onclick="this.classList.toggle('flipped')"><div class="thing-inner"><div class="thing-front">3</div><div class="thing-back">You always know how to comfort me.</div></div></div>
+                <div class="thing-card" onclick="this.classList.toggle('flipped')"><div class="thing-inner"><div class="thing-front">4</div><div class="thing-back">You make ordinary days feel special.</div></div></div>
+                <div class="thing-card" onclick="this.classList.toggle('flipped')"><div class="thing-inner"><div class="thing-front">5</div><div class="thing-back">You are kind in the quietest ways.</div></div></div>
+                <div class="thing-card" onclick="this.classList.toggle('flipped')"><div class="thing-inner"><div class="thing-front">6</div><div class="thing-back">You are thoughtful without even trying.</div></div></div>
+                <div class="thing-card" onclick="this.classList.toggle('flipped')"><div class="thing-inner"><div class="thing-front">7</div><div class="thing-back">You make me feel safe and understood.</div></div></div>
+                <div class="thing-card" onclick="this.classList.toggle('flipped')"><div class="thing-inner"><div class="thing-front">8</div><div class="thing-back">You always bring calm to my chaos.</div></div></div>
+                <div class="thing-card" onclick="this.classList.toggle('flipped')"><div class="thing-inner"><div class="thing-front">9</div><div class="thing-back">You are strong, sweet, and so genuine.</div></div></div>
+                <div class="thing-card" onclick="this.classList.toggle('flipped')"><div class="thing-inner"><div class="thing-front">10</div><div class="thing-back">You always try your best for the people you love.</div></div></div>
+                <div class="thing-card" onclick="this.classList.toggle('flipped')"><div class="thing-inner"><div class="thing-front">11</div><div class="thing-back">You have such a beautiful heart.</div></div></div>
+                <div class="thing-card" onclick="this.classList.toggle('flipped')"><div class="thing-inner"><div class="thing-front">12</div><div class="thing-back">You make me want to become a better person.</div></div></div>
+                <div class="thing-card" onclick="this.classList.toggle('flipped')"><div class="thing-inner"><div class="thing-front">13</div><div class="thing-back">You are so easy to care about.</div></div></div>
+                <div class="thing-card" onclick="this.classList.toggle('flipped')"><div class="thing-inner"><div class="thing-front">14</div><div class="thing-back">You make silence feel warm and comfortable.</div></div></div>
+                <div class="thing-card" onclick="this.classList.toggle('flipped')"><div class="thing-inner"><div class="thing-front">15</div><div class="thing-back">You are one of the reasons I smile so much.</div></div></div>
+                <div class="thing-card" onclick="this.classList.toggle('flipped')"><div class="thing-inner"><div class="thing-front">16</div><div class="thing-back">You deserve every bit of love you give away.</div></div></div>
+                <div class="thing-card" onclick="this.classList.toggle('flipped')"><div class="thing-inner"><div class="thing-front">17</div><div class="thing-back">You are my favorite person, always.</div></div></div>
+            </div>
+        </div>
+
+        <div id="sakura-letter-panel" class="sakura-panel hidden">
+            <button class="sakura-panel-close" onclick="showSakuraPanel('menu')">← Back</button>
+            <div class="message-text-wrapper">
+                <h2 class="message-title">Love Letter</h2>
+                <div class="message-body">
+                    To My Dearest Love, on Your 17th Birthday ♡
+                    <br><br>
+                    Happy 17th Birthday, my love.
+                    <br><br>
+                    I've been staring at this blank page for far longer than I want to admit because every time I try to write about you, I find myself struggling to put into words what my heart seems to understand so easily. How do you explain what someone means to you when they've become such a natural part of your life? How do you describe the person who quietly became your favorite thought, your safest place, and the best part of so many ordinary days?
+                    <br><br>
+                    Seventeen years ago, the world welcomed you into it. It was just another day to everyone else, but now I can't help thinking about how lucky the world was that day. Because somewhere, a boy was born who would grow into someone capable of making people feel loved simply by being himself. And somehow, years later, I got lucky enough to know that person.
+                    <br><br>
+                    I don't tell you this enough, but sometimes I stop and think about how much you've changed my life. Not in some dramatic, movie-like way. You changed it quietly. Gently. The way sunlight slowly fills a room without anyone noticing. Before you, I never realized how guarded I was. I never realized how much of myself I kept hidden from the world. Then you came along, and somehow being myself felt easy. Being vulnerable felt less frightening. You made me softer without even trying, and I don't think I ever want to be the person I was before I met you.
+                    <br><br>
+                    What I love most about you isn't just the way you make me happy. It's the way you exist in my life without even trying and somehow make everything feel lighter. You're in the songs I listen to, in the random moments that make me smile, in every exciting thing that happens that makes me immediately think, "I can't wait to tell him." You've become part of the little things, and I think that's how you know someone truly matters. Not when they're only present in your biggest moments, but when they quietly live in all the small ones too.
+                    <br><br>
+                    Sometimes it's honestly a little scary to admit how much you mean to me. Not because I regret it, but because caring this deeply about someone makes your heart feel exposed. There are moments when I look at you and feel overwhelmed by how important you've become to me. You are no longer just someone I love. You've become someone whose happiness matters to me, whose dreams I find myself rooting for, whose sadness I wish I could take away, and whose smile feels like one of my favorite things in the world.
+                    <br><br>
+                    As you turn seventeen today, I hope you know how loved you are. I hope you know that the people around you are better because you're here. I hope you never lose the kindness in your heart, the dreams you carry, or the things that make you uniquely you. And if there ever comes a day when you doubt yourself, I hope you remember that there is someone who sees so much beauty in you, even in the parts you struggle to love yourself.
+                    <br><br>
+                    Thank you for every conversation, every laugh, every memory, and every moment you've shared with me. Thank you for becoming such an important part of my life. Meeting you wasn't just one of the happiest things that happened to me. It changed me. It taught me that love can feel safe, gentle, and real all at once.
+                    <br><br>
+                    I don't know what the future holds for us. Nobody does. But what I do know is that if I could go back and live this life all over again, I would still want every road to lead me to you. I would still choose every conversation, every memory, every moment that brought me closer to the person writing themselves into my heart without even realizing it.
+                    <br><br>
+                    Happy Birthday, my love.
+                    <br><br>
+                    If loving you is the one thing I get right in this life, then I think that's more than enough for me. No matter how many birthdays come and go, no matter how much time passes, I will always be grateful that seventeen years ago, the world gave me the chance to one day know you.
+                    <br><br>
+                    Forever cheering for you.
+                    <br>
+                    Forever grateful for you.
+                    <br>
+                    Forever loving you. ♡
+                    <br><br>
+                    <span class="secret-link" onclick="openSecretMessage()">Secret Message</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="sakura-gallery-panel" class="sakura-panel hidden">
+            <button class="sakura-panel-close" onclick="showSakuraPanel('menu')">← Back</button>
+            <div class="video-container" style="margin-top: 10px;">
+                <video width="100%" controls style="border-radius: 15px; border: 2px solid #ddd; aspect-ratio: 9/16; object-fit: cover;">
+                    <source src="lv_0_20251229021629_1.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        <div class="sakura-heart">♡</div>
+    </div>
+</div>
+
  <div id="img-viewer" class="modal-overlay hidden">
     <span class="close-viewer" onclick="closeImg()">×</span>
     
@@ -93,6 +210,139 @@
         <img id="full-img" src="">
         
         <button class="nav-btn next-btn" onclick="changeImg(1); event.stopPropagation()">&#10095;</button>
+    </div>
+</div>
+
+<div id="secret-message-modal" class="modal-overlay hidden" style="opacity: 0;" onclick="if(event.target===this) closeSecretMessage()">
+    <div class="secret-message-card">
+        <button class="close-things-btn" onclick="closeSecretMessage()">×</button>
+        <div class="things-title">Secret Message</div>
+        <button class="secret-envelope" type="button" onclick="toggleSecretEnvelope(event)">
+            <div class="envelope-back"></div>
+            <div class="envelope-side envelope-side-left"></div>
+            <div class="envelope-side envelope-side-right"></div>
+            <div class="envelope-flap"></div>
+            <div class="envelope-front"></div>
+            <div class="envelope-letter" onclick="toggleLetterReveal(event)">
+                <div class="envelope-letter-inner">
+                    <div class="secret-note-text">
+                        <span class="secret-note-label">For you</span>
+                        <p>ditunggu next surprise nya ya babyyy hehe</p>
+                    </div>
+                </div>
+            </div>
+        </button>
+    </div>
+</div>
+
+<div id="things-modal" class="modal-overlay hidden" style="opacity: 0;" onclick="if(event.target===this) closeThingsModal()">
+    <div class="things-modal-card">
+        <button class="close-things-btn" onclick="closeThingsModal()">×</button>
+        <div class="things-title">17 things I like about you</div>
+        <div class="things-grid">
+            <div class="thing-card" onclick="this.classList.toggle('flipped')">
+                <div class="thing-inner">
+                    <div class="thing-front">1</div>
+                    <div class="thing-back">Your smile makes everything brighter.</div>
+                </div>
+            </div>
+            <div class="thing-card" onclick="this.classList.toggle('flipped')">
+                <div class="thing-inner">
+                    <div class="thing-front">2</div>
+                    <div class="thing-back">Your laugh is one of my favorite sounds.</div>
+                </div>
+            </div>
+            <div class="thing-card" onclick="this.classList.toggle('flipped')">
+                <div class="thing-inner">
+                    <div class="thing-front">3</div>
+                    <div class="thing-back">You always know how to comfort me.</div>
+                </div>
+            </div>
+            <div class="thing-card" onclick="this.classList.toggle('flipped')">
+                <div class="thing-inner">
+                    <div class="thing-front">4</div>
+                    <div class="thing-back">You make ordinary days feel special.</div>
+                </div>
+            </div>
+            <div class="thing-card" onclick="this.classList.toggle('flipped')">
+                <div class="thing-inner">
+                    <div class="thing-front">5</div>
+                    <div class="thing-back">You are kind in the quietest ways.</div>
+                </div>
+            </div>
+            <div class="thing-card" onclick="this.classList.toggle('flipped')">
+                <div class="thing-inner">
+                    <div class="thing-front">6</div>
+                    <div class="thing-back">You are thoughtful without even trying.</div>
+                </div>
+            </div>
+            <div class="thing-card" onclick="this.classList.toggle('flipped')">
+                <div class="thing-inner">
+                    <div class="thing-front">7</div>
+                    <div class="thing-back">You make me feel safe and understood.</div>
+                </div>
+            </div>
+            <div class="thing-card" onclick="this.classList.toggle('flipped')">
+                <div class="thing-inner">
+                    <div class="thing-front">8</div>
+                    <div class="thing-back">You always bring calm to my chaos.</div>
+                </div>
+            </div>
+            <div class="thing-card" onclick="this.classList.toggle('flipped')">
+                <div class="thing-inner">
+                    <div class="thing-front">9</div>
+                    <div class="thing-back">You are strong, sweet, and so genuine.</div>
+                </div>
+            </div>
+            <div class="thing-card" onclick="this.classList.toggle('flipped')">
+                <div class="thing-inner">
+                    <div class="thing-front">10</div>
+                    <div class="thing-back">You always try your best for the people you love.</div>
+                </div>
+            </div>
+            <div class="thing-card" onclick="this.classList.toggle('flipped')">
+                <div class="thing-inner">
+                    <div class="thing-front">11</div>
+                    <div class="thing-back">You have such a beautiful heart.</div>
+                </div>
+            </div>
+            <div class="thing-card" onclick="this.classList.toggle('flipped')">
+                <div class="thing-inner">
+                    <div class="thing-front">12</div>
+                    <div class="thing-back">You make me want to become a better person.</div>
+                </div>
+            </div>
+            <div class="thing-card" onclick="this.classList.toggle('flipped')">
+                <div class="thing-inner">
+                    <div class="thing-front">13</div>
+                    <div class="thing-back">You are so easy to care about.</div>
+                </div>
+            </div>
+            <div class="thing-card" onclick="this.classList.toggle('flipped')">
+                <div class="thing-inner">
+                    <div class="thing-front">14</div>
+                    <div class="thing-back">You make silence feel warm and comfortable.</div>
+                </div>
+            </div>
+            <div class="thing-card" onclick="this.classList.toggle('flipped')">
+                <div class="thing-inner">
+                    <div class="thing-front">15</div>
+                    <div class="thing-back">You are one of the reasons I smile so much.</div>
+                </div>
+            </div>
+            <div class="thing-card" onclick="this.classList.toggle('flipped')">
+                <div class="thing-inner">
+                    <div class="thing-front">16</div>
+                    <div class="thing-back">You deserve every bit of love you give away.</div>
+                </div>
+            </div>
+            <div class="thing-card" onclick="this.classList.toggle('flipped')">
+                <div class="thing-inner">
+                    <div class="thing-front">17</div>
+                    <div class="thing-back">You are my favorite person, always.</div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -118,7 +368,6 @@ I hope we can keep growing together, learning from each other, and holding on, n
 
 *Merry Christmas, my love.*
 *You are one of the best gifts in my life 🤍* </p>
-    <script src="func.js"></script>
 <div id="xmas-gallery-modal" class="xmas-modal-overlay" onclick="closeXmasGallery(event)">
     <div class="xmas-modal-content">
         <h3 style="color: #4a4a4a; margin-bottom: 15px; font-family: 'Quicksand';">Our Christmas Memories</h3>
