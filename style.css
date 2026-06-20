@@ -3,6 +3,7 @@ body {
     background-color: #2b2b2b; /* Abu-abu sangat muda */
     font-family: 'Quicksand', sans-serif;
     margin: 0;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,7 +15,18 @@ body {
 .hidden { display: none !important; }
 
 /* Kotak Utama */
+#fireworks-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
 .glass-card {
+    position: relative;
+    z-index: 1;
     background: rgba(255, 255, 255, 0.056); /* Putih bersih transparan */
     backdrop-filter: blur(10px);
     padding: 40px;
@@ -33,6 +45,7 @@ body {
     gap: 60px;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
 @media (max-width: 600px) {
