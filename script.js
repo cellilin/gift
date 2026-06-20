@@ -3,9 +3,12 @@ let input = "";
 const correctCode = "2025"; 
 const correctCode2 = "2512";
 const song = document.getElementById("mySong");
+const display = document.getElementById("display-text");
 
 // --- FUNGSI PASSCODE ---
 function pressKey(num) {
+    if (!display) return;
+
     if (input.length < 4) {
         input += num;
         let display = document.getElementById("display-text");
@@ -33,6 +36,8 @@ function pressKey(num) {
 }
 
 function backspace() {
+    if (!display) return;
+
     if (input.length > 0) {
         // Menghapus 1 karakter terakhir dari variabel input
         input = input.substring(0, input.length - 1);
@@ -282,6 +287,8 @@ function logout() {
 
 function toggleMusic() {
     const btn = document.getElementById("playBtn");
+    if (!song || !btn) return;
+
     if (song.paused) {
         song.play();
         btn.innerText = "II";
@@ -350,6 +357,8 @@ document.getElementById("img-viewer").addEventListener("click", function(e) {
 
 function createFireworks() {
     const canvas = document.getElementById('fireworks-canvas');
+    if (!canvas || !canvas.getContext) return;
+
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
