@@ -761,14 +761,14 @@ video {
 }
 
 @media (max-width: 768px) {
+
+    .thing-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
     .thing-back {
         font-size: 0.55rem;
-        line-height: 1.2;
-        padding: 6 px;
-    }
-
-    .thing-card {
-        min-height: 120px;
+        padding: 4 px;
     }
 }
 
